@@ -135,23 +135,32 @@
             font-size: 1.1em;
             line-height: 1.5em;
         }
+
+        #visitor-counter {
+            text-align: center;
+            margin: 60px 0;
+            font-family: "Comic Sans MS", cursive, sans-serif;
+            font-size: 2em;
+            color: #00ff00;
+            text-shadow: 2px 2px #000000;
+        }
+
+        .visitor-box {
+            display: inline-block;
+            background: #ffffff;
+            color: #000080;
+            border: 3px inset #00ffff;
+            padding: 10px 20px;
+            margin-left: 10px;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
     </style>
 </head>
 
 <body>
 
     <h1 class="site-title">Mats bytter jobb. Veldig trist og veldig kult!</h1>
-
-    <!-- MIDI musikk -->
-    <audio id="bg-music" autoplay loop>
-        <source src="https://www.vgmusic.com/music/console/atari/2600/ast_2600.mid" type="audio/midi">
-    </audio>
-    <button onclick="toggleMusic()" style="position:fixed;top:10px;right:10px;z-index:1000;">🔊 Slå av/på lyd</button>
-
-    <!-- Logoer og nedtelling -->
-    <header>
-        <h1 class="main-title">NEDTELLING TIL NY JOBB!</h1>
-    </header>
 
     <!-- GIFer øverst -->
     <div id="gif-top">
@@ -165,6 +174,11 @@
             src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExaDVoZnRrcm5nN2pscmU4dnYyamZhZXFkYm9oaHN2cnVtbjU4M3B3bSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/cfuL5gqFDreXxkWQ4o/giphy.gif"
             alt="Glitch Stars">
     </div>
+    <!-- Logoer og nedtelling -->
+    <header>
+        <h1 class="main-title">NEDTELLING TIL NY JOBB!</h1>
+    </header>
+
 
     <!-- Kalender med ansikt -->
     <div id="calendar-container">
@@ -206,6 +220,12 @@
             inn i en ny hverdag!
         </p>
     </section>
+
+    <div id="visitor-counter">
+        Besøksteller:
+        <span class="visitor-box" id="counter">Laster inn...</span>
+    </div>
+
 
     <!-- Under construction -->
     <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Under_construction_graphic.gif"
@@ -268,6 +288,16 @@
                 spark.remove();
             }, 300);
         });
+        (function () {
+            const counterEl = document.getElementById("counter");
+            const startFakeCount = 34;
+            const baseDate = new Date("2025-05-01T00:00:00");
+            const now = new Date();
+            const minutesSince = Math.floor((now - baseDate) / (1000 * 60));
+            const fakeVisitors = startFakeCount + minutesSince * 3;
+            counterEl.textContent = fakeVisitors.toLocaleString("no-NO");
+        })();
+
     </script>
 </body>
 
