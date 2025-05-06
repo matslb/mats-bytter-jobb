@@ -92,6 +92,7 @@
             font-weight: bold;
             font-size: 0.9em;
             color: #000080;
+            width: 20px;
         }
 
         .logo {
@@ -99,7 +100,6 @@
             height: auto;
             background-color: white;
             margin: 0 20px;
-            z-index: 1;
         }
 
         #face {
@@ -162,8 +162,9 @@
             margin-top: 5px;
             width: 100px;
             background-color: #0fcabb;
-            margin-top: 20px;
+            margin-top: 10px;
             border: 2px solid #ff0000;
+            z-index: 1000;
         }
     </style>
 </head>
@@ -251,7 +252,7 @@
 
     <script>
         const startDate = new Date("2025-05-01T00:00:00");
-        const endDate = new Date("2025-06-03T00:00:00");
+        const endDate = new Date("2025-06-02T10:00:00");
         const msPerDay = 1000 * 60 * 60 * 24;
         const totalDays = Math.ceil((endDate - startDate) / msPerDay);
 
@@ -266,6 +267,8 @@
                 const d2 = document.createElement('div');
                 d2.textContent += "Siste dag i IN";
                 d2.className = "note"
+                d.style.backgroundColor = "#0fcabb";
+                d.style.border = "2px solid #ff0000;";
                 d.appendChild(d2);
             }
 
@@ -273,6 +276,8 @@
                 const d2 = document.createElement('div');
                 d2.textContent += "Første dag i Vipps";
                 d2.className = "note"
+                d.style.backgroundColor = "#0fcabb";
+                d.style.border = "2px solid #ff0000;";
                 d.appendChild(d2);
             }
             cal.appendChild(d);
@@ -282,10 +287,11 @@
             const now = new Date();
             const elapsed = now - startDate;
             const fraction = Math.min(Math.max(elapsed / (endDate - startDate), 0), 1);
+            console.log(fraction);
             const face = document.getElementById('face');
             const calEl = document.getElementById('calendar');
             const calWidth = calEl.clientWidth;
-            face.style.left = (fraction * (calWidth - face.clientWidth)) + 'px';
+            face.style.left = (fraction * (calWidth - (face.clientWidth + 100))) + 'px';
 
             const daysLeft = Math.ceil((endDate - now) / msPerDay) - 1;
             document.querySelector('.main-title').textContent =
