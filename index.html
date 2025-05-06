@@ -154,6 +154,15 @@
             font-weight: bold;
             font-size: 1.2em;
         }
+
+        .note {
+            color: #ff0000;
+            margin-top: 5px;
+            width: 100px;
+            background-color: #0fcabb;
+            margin-top: 20px;
+            border: 2px solid #ff0000;
+        }
     </style>
 </head>
 
@@ -197,11 +206,15 @@
     </div>
     <!-- GIFer nederst -->
     <div id="gif-bottom">
-                <img class="gif" src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExdjd6MzB0cGw0NGFnenR6M2JsMDFwa3diOW45dmR3Z3RrbjdxYW8zMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ShRRL5pf8ZvoY/giphy.gif" alt="Neon Flash">
+        <img class="gif"
+            src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExdjd6MzB0cGw0NGFnenR6M2JsMDFwa3diOW45dmR3Z3RrbjdxYW8zMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ShRRL5pf8ZvoY/giphy.gif"
+            alt="Neon Flash">
 
         <img class="gif" src="https://arngren.net/Porsche.911_turbo_anim.gif" alt="Retro Sparkle">
         <img class="gif" src="https://arngren.net/Porsche.911_turbo_anim.gif" alt="Neon Flash">
-                <img class="gif" src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExdjd6MzB0cGw0NGFnenR6M2JsMDFwa3diOW45dmR3Z3RrbjdxYW8zMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ShRRL5pf8ZvoY/giphy.gif" alt="Neon Flash">
+        <img class="gif"
+            src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExdjd6MzB0cGw0NGFnenR6M2JsMDFwa3diOW45dmR3Z3RrbjdxYW8zMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ShRRL5pf8ZvoY/giphy.gif"
+            alt="Neon Flash">
 
     </div>
     <!-- Tekstseksjoner -->
@@ -236,7 +249,7 @@
 
     <script>
         const startDate = new Date("2025-05-01T00:00:00");
-        const endDate = new Date("2025-06-02T00:00:00");
+        const endDate = new Date("2025-06-03T00:00:00");
         const msPerDay = 1000 * 60 * 60 * 24;
         const totalDays = Math.ceil((endDate - startDate) / msPerDay);
 
@@ -246,6 +259,20 @@
             const d = document.createElement('div');
             d.className = 'day';
             d.textContent = dayDate.getDate() + '. ' + dayDate.toLocaleString('no-NO', { month: 'short' });
+
+            if (dayDate.getDate() == 28) {
+                const d2 = document.createElement('div');
+                d2.textContent += "Siste dag i IN";
+                d2.className = "note"
+                d.appendChild(d2);
+            }
+
+            if (dayDate.getDate() == 2 && dayDate.getMonth() == 5) {
+                const d2 = document.createElement('div');
+                d2.textContent += "Første dag i Vipps";
+                d2.className = "note"
+                d.appendChild(d2);
+            }
             cal.appendChild(d);
         }
 
@@ -258,7 +285,7 @@
             const calWidth = calEl.clientWidth;
             face.style.left = (fraction * (calWidth - face.clientWidth)) + 'px';
 
-            const daysLeft = Math.ceil((endDate - now) / msPerDay);
+            const daysLeft = Math.ceil((endDate - now) / msPerDay) - 1;
             document.querySelector('.main-title').textContent =
                 daysLeft > 0
                     ? `NEDTELLING: ${daysLeft} dag${daysLeft === 1 ? '' : 'er'} igjen!`
