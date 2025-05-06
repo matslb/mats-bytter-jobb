@@ -293,7 +293,7 @@
             const calWidth = calEl.clientWidth;
             face.style.left = (fraction * (calWidth - (face.clientWidth + 100))) + 'px';
 
-            const daysLeft = Math.ceil((endDate - now) / msPerDay) - 1;
+            const daysLeft = Math.ceil((endDate - now) / msPerDay);
             document.querySelector('.main-title').textContent =
                 daysLeft > 0
                     ? `NEDTELLING: ${daysLeft} dag${daysLeft === 1 ? '' : 'er'} igjen!`
