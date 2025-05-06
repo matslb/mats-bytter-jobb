@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="no">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mats bytter jobb. Veldig trist og veldig kult!</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Comic Sans MS", cursive, sans-serif;
+            color: #ffffff;
+            background-color: #000000;
+            background-image: url('https://media.tenor.com/AJBv6U1rfkQAAAAM/background-image-galaxy.gif');
+            background-repeat: repeat;
+            background-attachment: fixed;
+        }
+
+        h1.site-title {
+            text-align: center;
+            font-size: 4em;
+            color: #00ffff;
+            text-shadow: 3px 3px #00008b;
+            margin: 20px 0;
+        }
+
+        header {
+            text-align: center;
+            border-bottom: 4px dashed #ff00ff;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        header img {
+            height: 80px;
+            border: 3px solid #ffff00;
+            background: #ffffff;
+        }
+
+        h1.main-title {
+            text-align: center;
+            font-size: 2.5em;
+            color: #ff00ff;
+            margin: 0;
+        }
+
+        #gif-top,
+        #gif-bottom {
+            width: 100%;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .gif {
+            width: 150px;
+            margin: 0 10px;
+            opacity: 0.9;
+            border: 2px solid #00ffff;
+            background: #000000;
+        }
+
+        #calendar-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px auto;
+            width: 80%;
+        }
+
+        #calendar-section {
+            width: 80%;
+            margin: 0 auto;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        #calendar {
+            display: flex;
+            justify-content: space-between;
+            flex-grow: 1;
+            position: relative;
+        }
+
+        .day {
+            flex: 1;
+            margin: 0 2px;
+            height: 50px;
+            background: #ffffe0;
+            border: 2px inset #ffffff;
+            text-align: center;
+            font-weight: bold;
+            font-size: 0.9em;
+            color: #000080;
+        }
+
+        .logo {
+            width: 200px;
+            height: auto;
+            background-color: white;
+            margin: 0 20px;
+        }
+
+        #face {
+            position: absolute;
+            top: -30px;
+            width: 60px;
+            transition: left 1s linear;
+            z-index: 2;
+        }
+
+        section {
+            width: 80%;
+            margin: 40px auto;
+            padding: 20px;
+            border: 4px double #00ffff;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        section:nth-of-type(odd) {
+            background-color: #00008b;
+        }
+
+        section:nth-of-type(even) {
+            background-color: #8b0000;
+        }
+
+        section h2 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            color: #ffff00;
+        }
+
+        section p {
+            font-size: 1.1em;
+            line-height: 1.5em;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 class="site-title">Mats bytter jobb. Veldig trist og veldig kult!</h1>
+
+    <!-- MIDI musikk -->
+    <audio id="bg-music" autoplay loop>
+        <source src="https://www.vgmusic.com/music/console/atari/2600/ast_2600.mid" type="audio/midi">
+    </audio>
+    <button onclick="toggleMusic()" style="position:fixed;top:10px;right:10px;z-index:1000;">🔊 Slå av/på lyd</button>
+
+    <!-- Logoer og nedtelling -->
+    <header>
+        <h1 class="main-title">NEDTELLING TIL NY JOBB!</h1>
+    </header>
+
+    <!-- GIFer øverst -->
+    <div id="gif-top">
+        <img class="gif"
+            src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExMngxd2xlank1dnJ5c2o2dXFuajRpenBjemwyNmNrdjA5bzFjdWpxZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/eCwAEs05phtK/giphy.gif"
+            alt="Warp Speed">
+        <img class="gif"
+            src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExb2NoNXNwZzhiZm9zdXIxZmcycDZrczZpc3NseWVxM3ZjaDVib3JicyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/p1pdQ17eyPp1RB54dr/giphy.gif"
+            alt="Space Loop">
+        <img class="gif"
+            src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExaDVoZnRrcm5nN2pscmU4dnYyamZhZXFkYm9oaHN2cnVtbjU4M3B3bSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/cfuL5gqFDreXxkWQ4o/giphy.gif"
+            alt="Glitch Stars">
+    </div>
+
+    <!-- Kalender med ansikt -->
+    <div id="calendar-container">
+
+        <div class="logo">
+            <img width=" 200px"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Innovasjon_Norge-logo.svg/1200px-Innovasjon_Norge-logo.svg.png" />
+        </div>
+        <div id="calendar-section">
+            <div id="calendar"></div>
+            <img id="face" src="https://erdetfesthosmatsikveld.no/party.png" alt="Ansikt">
+        </div>
+        <div class="logo">
+            <img width="200px" src="https://media.ffycdn.net/eu/vipps/skJ7csBAnBn6LJMGjZvG.svg" alt="Vipps">
+        </div>
+
+    </div>
+    <!-- GIFer nederst -->
+    <div id="gif-bottom">
+        <img class="gif" src="https://arngren.net/Porsche.911_turbo_anim.gif" alt="Retro Sparkle">
+        <img class="gif" src="https://arngren.net/Porsche.911_turbo_anim.gif" alt="Neon Flash">
+    </div>
+    <!-- Tekstseksjoner -->
+    <section>
+        <h2>Så trist å dra...</h2>
+        <p>
+            Det er vemodig å si farvel til Innovasjon Norge, der jeg har opplevd fantastiske prosjekter,
+            lært masse nytt om innovasjon og teknologi, og ikke minst fått gode venner for livet.
+            Hver dag her har vært en reise i lærerik utforskning – og nå må jeg legge nostalgien til side.
+        </p>
+    </section>
+
+    <section>
+        <h2>Spennende fremtid!</h2>
+        <p>
+            Overgangen fra det offentlige til private Vipps MobilePay er kjempeinspirerende.
+            Nå får jeg jobbe i et lynraskt, kommersielt miljø, hvor beslutningene tas i sanntid
+            og innovasjonen skjer i ultrafart – jeg gleder meg til å ta med meg alt jeg har lært
+            inn i en ny hverdag!
+        </p>
+    </section>
+
+    <!-- Under construction -->
+    <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Under_construction_graphic.gif"
+        alt="Under construction" style="display:block;margin:30px auto;">
+
+    <script>
+        const startDate = new Date("2025-05-01T00:00:00");
+        const endDate = new Date("2025-06-02T00:00:00");
+        const msPerDay = 1000 * 60 * 60 * 24;
+        const totalDays = Math.ceil((endDate - startDate) / msPerDay);
+
+        const cal = document.getElementById('calendar');
+        for (let i = 0; i < totalDays; i++) {
+            const dayDate = new Date(startDate.getTime() + i * msPerDay);
+            const d = document.createElement('div');
+            d.className = 'day';
+            d.textContent = dayDate.getDate() + '. ' + dayDate.toLocaleString('no-NO', { month: 'short' });
+            cal.appendChild(d);
+        }
+
+        function update() {
+            const now = new Date();
+            const elapsed = now - startDate;
+            const fraction = Math.min(Math.max(elapsed / (endDate - startDate), 0), 1);
+            const face = document.getElementById('face');
+            const calEl = document.getElementById('calendar');
+            const calWidth = calEl.clientWidth;
+            face.style.left = (fraction * (calWidth - face.clientWidth)) + 'px';
+
+            const daysLeft = Math.ceil((endDate - now) / msPerDay);
+            document.querySelector('.main-title').textContent =
+                daysLeft > 0
+                    ? `NEDTELLING: ${daysLeft} dag${daysLeft === 1 ? '' : 'er'} igjen!`
+                    : 'GRATULERER – DAGEN ER HER!';
+        }
+
+        update();
+        setInterval(update, 1000 * 60 * 5);
+
+        function toggleMusic() {
+            const music = document.getElementById("bg-music");
+            music.play();
+        }
+
+        document.addEventListener('mousemove', function (e) {
+            const spark = document.createElement('div');
+            spark.style.position = 'absolute';
+            spark.style.width = '5px';
+            spark.style.height = '5px';
+            spark.style.borderRadius = '50%';
+            spark.style.background = '#ff0';
+            spark.style.left = e.pageX + 'px';
+            spark.style.top = e.pageY + 'px';
+            spark.style.pointerEvents = 'none';
+            spark.style.opacity = 0.8;
+            spark.style.zIndex = 9999;
+            document.body.appendChild(spark);
+
+            setTimeout(() => {
+                spark.remove();
+            }, 300);
+        });
+    </script>
+</body>
+
+</html>
