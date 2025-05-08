@@ -346,9 +346,6 @@
             }, 300);
         });
 
-        let player;
-        let unmuted = false;
-
         // Load YouTube IFrame API
         const tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
@@ -359,6 +356,7 @@
             player = new YT.Player('player', {
                 videoId: 'Eo-KmOd3i7s',
                 playerVars: {
+                    autoplay: 1,
                     mute: 1,
                 },
                 events: {
@@ -374,7 +372,6 @@
                     player.unMute();
                     player.seekTo(15);
                     player.playVideo();
-                    unmuted = true;
                 }, 500);
             }, { once: true }); // only trigger once
         }
