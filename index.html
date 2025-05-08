@@ -361,10 +361,12 @@
 
         function onPlayerReady(event) {
             // Listen for first mouse movement to unmute
-            player.unMute();
-            player.seekTo(15);  // rewind to 15s
-            player.playVideo();
-            unmuted = true;
+            document.addEventListener('mousemove', () => {
+                player.unMute();
+                player.seekTo(15);  // rewind to 15s
+                player.playVideo();
+                unmuted = true;
+            }, { once: true }); // only trigger once
         }
     </script>
 </body>
