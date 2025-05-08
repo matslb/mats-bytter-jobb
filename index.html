@@ -1,6 +1,7 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<!DOCTYPE html>
 <html lang="no">
 <link rel="icon" href="https://erdetfesthosmatsikveld.no/favicon.ico">
+
 <head>
     <link href="https://fonts.googleapis.com/css2?family=Comic+Neue&display=swap" rel="stylesheet">
 
@@ -253,10 +254,14 @@
             src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fmatslb.github.io%2Fmats-bytter-jobb%2F&amp;label=&amp;labelColor=%23000000&amp;countColor=%23000000&amp;labelStyle=upper">
     </div>
 
-
     <!-- Under construction -->
     <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Under_construction_graphic.gif"
         alt="Under construction" style="display:block;margin:30px auto;">
+
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/Eo-KmOd3i7s?si=xDHkU-04IbNAb9yG&amp;start=15"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
     <script>
         const startDate = new Date("2025-05-01T00:00:00");
@@ -334,15 +339,19 @@
                 spark.remove();
             }, 300);
         });
-        (function () {
-            const counterEl = document.getElementById("counter");
-            const startFakeCount = 34;
-            const baseDate = new Date("2025-05-06T00:00:00");
-            const now = new Date();
-            const minutesSince = Math.floor((now - baseDate) / (1000 * 60));
-            const fakeVisitors = startFakeCount + minutesSince * 3;
-            counterEl.textContent = fakeVisitors.toLocaleString("no-NO");
-        })();
+
+        function autoplay() {
+            var t = setTimeout(function () {
+                var button = document.querySelector('[title="Play"]') || false;
+                if (button) {
+                    console.log('Click', button)
+                    button.click()
+                }
+            }, 999)
+        }
+        document.addEventListener('DOMContentLoaded', (event) => {
+            autoplay()
+        })
 
     </script>
 </body>
