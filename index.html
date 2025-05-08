@@ -358,6 +358,7 @@
                 playerVars: {
                     autoplay: 1,
                     mute: 1,
+                    start: 15,
                 },
                 events: {
                     onReady: onPlayerReady
@@ -368,13 +369,12 @@
         function onPlayerReady(event) {
             event.target.playVideo();
 
-            // Listen for first mouse movement to unmute
             document.addEventListener('mousemove', () => {
                 setTimeout(() => {
                     player.unMute();
-                    player.seekTo(15);
+                    player.seekTo(15, true);
                     player.playVideo();
-                }, 500);
+                }, 300);
             }, { once: true }); // only trigger once
         }
     </script>
