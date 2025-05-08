@@ -298,7 +298,13 @@
         alt="Under construction" style="display:block;margin:30px auto;">
 
 
-    <div id="player"></div>
+    <div id="soundcloud-player-container">
+        <iframe id="sc-player" width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
+            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/425246451&auto_play=false">
+        </iframe>
+    </div>
+
+    <script src="https://w.soundcloud.com/player/api.js"></script>
 
     <script>
         const startDate = new Date("2025-05-01T00:00:00");
@@ -377,37 +383,13 @@
             }, 300);
         });
 
-        // Load YouTube IFrame API
-        const tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        document.head.appendChild(tag);
+        document.addEventListener('click', () => {
+            const iframe = document.getElementById('sc-player');
+            const widget = SC.Widget(iframe);
 
-        // Called by the API when it's ready
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('player', {
-                videoId: 'Eo-KmOd3i7s',
-                playerVars: {
-                    autoplay: 1,
-                    mute: 1,
-                    start: 15,
-                },
-                events: {
-                    onReady: onPlayerReady
-                }
-            });
-        }
-
-        function onPlayerReady(event) {
-            event.target.playVideo();
-
-            document.addEventListener('click', () => {
-                setTimeout(() => {
-                    player.unMute();
-                    player.seekTo(20, true);
-                    player.playVideo();
-                }, 300);
-            }, { once: true }); // only trigger once
-        }
+            widget.play();
+            widget.seekTo(8000);
+        }, { once: true });
     </script>
 </body>
 
