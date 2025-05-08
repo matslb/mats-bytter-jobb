@@ -258,10 +258,8 @@
     <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Under_construction_graphic.gif"
         alt="Under construction" style="display:block;margin:30px auto;">
 
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/Eo-KmOd3i7s?si=xDHkU-04IbNAb9yG&amp;start=15"
-        title="YouTube video player" frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+    <div id="player"></div>
 
     <script>
         const startDate = new Date("2025-05-01T00:00:00");
@@ -340,19 +338,42 @@
             }, 300);
         });
 
-        function autoplay() {
-            var t = setTimeout(function () {
-                var button = document.querySelector('[title="Play"]') || false;
-                if (button) {
-                    console.log('Click', button)
-                    button.click()
-                }
-            }, 999)
-        }
-        document.addEventListener('DOMContentLoaded', (event) => {
-            autoplay()
-        })
+        let player;
+        let unmuted = false;
 
+        // Load YouTube IFrame API
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        document.head.appendChild(tag);
+
+        // Called by the API when it's ready
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                videoId: 'Eo-KmOd3i7s',
+                playerVars: {
+                    autoplay: 1,
+                    mute: 1,
+                    start: 20
+                },
+                events: {
+                    onReady: onPlayerReady
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            event.target.playVideo();
+
+            // Listen for first mouse movement to unmute
+            document.addEventListener('mousemove', () => {
+                if (!unmuted) {
+                    player.unMute();
+                    player.seekTo(15);  // rewind to 15s
+                    player.playVideo();
+                    unmuted = true;
+                }
+            }, { once: true }); // only trigger once
+        }
     </script>
 </body>
 
