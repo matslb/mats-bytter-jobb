@@ -368,8 +368,6 @@
             document.addEventListener('mousemove', () => {
                 if (!unmuted) {
                     player.unMute();
-                    player.seekTo(15);  // rewind to 15s
-                    player.playVideo();
                     unmuted = true;
                 }
             }, { once: true }); // only trigger once
