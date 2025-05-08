@@ -351,9 +351,7 @@
             player = new YT.Player('player', {
                 videoId: 'Eo-KmOd3i7s',
                 playerVars: {
-                    autoplay: 1,
                     mute: 1,
-                    start: 20
                 },
                 events: {
                     onReady: onPlayerReady
@@ -368,6 +366,8 @@
             document.addEventListener('mousemove', () => {
                 if (!unmuted) {
                     player.unMute();
+                    player.seekTo(15);  // rewind to 15s
+                    player.playVideo();
                     unmuted = true;
                 }
             }, { once: true }); // only trigger once
