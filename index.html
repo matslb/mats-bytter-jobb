@@ -366,6 +366,8 @@
         }
 
         function onPlayerReady(event) {
+            event.target.playVideo();
+
             // Listen for first mouse movement to unmute
             document.addEventListener('mousemove', () => {
                 setTimeout(() => {
