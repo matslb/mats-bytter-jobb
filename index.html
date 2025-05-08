@@ -384,8 +384,11 @@
         });
 
         document.addEventListener('click', () => {
+            const container = document.getElementById('soundcloud-player-container');
             const iframe = document.getElementById('sc-player');
             const widget = SC.Widget(iframe);
+
+            container.style.opacity = 1;
 
             widget.play();
             widget.seekTo(8000);
