@@ -177,10 +177,10 @@
 
         #player {
             position: absolute;
-            bottom: 0;
+            top: 0;
             right: 0;
-            width: 20px;
-            height: 20px;
+            height: 50px;
+            width: 75px;
         }
     </style>
 </head>
@@ -370,10 +370,12 @@
         function onPlayerReady(event) {
             // Listen for first mouse movement to unmute
             document.addEventListener('mousemove', () => {
-                player.unMute();
-                player.seekTo(15);  // rewind to 15s
-                player.playVideo();
-                unmuted = true;
+                setTimeout(() => {
+                    player.unMute();
+                    player.seekTo(15);
+                    player.playVideo();
+                    unmuted = true;
+                }, 500);
             }, { once: true }); // only trigger once
         }
     </script>
