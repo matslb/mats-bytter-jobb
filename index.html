@@ -321,7 +321,7 @@
       }
 
       .guestbook-content {
-        max-width: 80%;
+        max-width: 100%;
       }
 
       .guestbook-name {
@@ -728,6 +728,7 @@
 
       function setGreetingTag(id, name, message, timeStamp) {
         const li = document.createElement("li");
+        let deviceId = localStorage.getItem("guestbookDeviceId");
 
         li.id = id;
         li.className = "guestbook-entry";
@@ -737,7 +738,7 @@
         img.className = "guestbook-image";
 
         const nameDiv = document.createElement("div");
-        nameDiv.textContent = name;
+        nameDiv.textContent = deviceId === id ? `${name} (deg)` : name;
         nameDiv.className = "guestbook-name";
 
         const messageDiv = document.createElement("div");
