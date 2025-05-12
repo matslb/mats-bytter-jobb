@@ -295,6 +295,8 @@
         margin: 0;
         max-width: 600px;
         margin-inline: auto;
+        max-height: 700px;
+        overflow-y: scroll;
       }
 
       .guestbook-entry {
@@ -307,7 +309,6 @@
         border-right-color: #404040;
         border-bottom-color: #404040;
         padding: 8px;
-        margin-bottom: 1rem;
         box-shadow: inset -1px -1px 0 #00000033;
         max-width: 100%;
       }
@@ -676,9 +677,16 @@
         getDatabase,
         ref,
         set,
+        query,
+        orderByChild,
         onChildAdded,
         onChildChanged,
       } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-database.js";
+      import {
+        getAuth,
+        signInAnonymously,
+        onAuthStateChanged,
+      } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-auth.js";
 
       const firebaseConfig = {
         apiKey: "AIzaSyBmztZKCqbUXf9rZZzu-Gp6kJ7XEF1kkHM",
@@ -694,8 +702,12 @@
 
       const app = initializeApp(firebaseConfig);
       const analytics = getAnalytics(app);
-
+      const auth = getAuth(app);
       const db = getDatabase(app);
+
+      signInAnonymously(auth).catch((error) => {
+        console.error("Anonymous sign-in failed:", error);
+      });
 
       const form = document.getElementById("guestbook-form");
       const messagesList = document.getElementById("messages");
@@ -717,11 +729,14 @@
       });
 
       const guestbookRef = ref(db, `guestbook`);
+      const sortedMessagesQuery = query(
+        guestbookRef,
+        orderByChild("timestamp")
+      );
 
-      onChildAdded(guestbookRef, (snapshot) => {
+      onChildAdded(sortedMessagesQuery, (snapshot) => {
         const entry = snapshot.val();
-
-        messagesList.appendChild(
+        messagesList.prepend(
           setGreetingTag(
             snapshot.key,
             entry.name,
@@ -751,7 +766,7 @@
         messageDiv.className = "guestbook-message";
 
         const timestampDiv = document.createElement("div");
-        timestampDiv.textContent = new Date(timeStamp).toLocaleDateString();
+        timestampDiv.textContent = getFormattedDate(new Date(timeStamp));
         timestampDiv.className = "guestbook-timestamp";
 
         const contentWrapper = document.createElement("div");
@@ -764,6 +779,16 @@
         li.appendChild(contentWrapper);
 
         return li;
+      }
+      function getFormattedDate(date) {
+        return new Intl.DateTimeFormat("no-NO", {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false,
+        }).format(date);
       }
     </script>
   </body>
