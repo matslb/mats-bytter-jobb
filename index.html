@@ -662,13 +662,7 @@
       });
     </script>
 
-    <script>
-      let deviceId = localStorage.getItem("guestbookDeviceId");
-      if (!deviceId) {
-        deviceId = crypto.randomUUID();
-        localStorage.setItem("guestbookDeviceId", deviceId);
-      }
-    </script>
+    <script></script>
 
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-app.js";
@@ -705,9 +699,16 @@
       const auth = getAuth(app);
       const db = getDatabase(app);
 
-      signInAnonymously(auth).catch((error) => {
-        console.error("Anonymous sign-in failed:", error);
-      });
+      signInAnonymously(auth)
+        .then((auth) => {
+          let storedUserId = localStorage.getItem("userId");
+          if (!storedUserId) {
+            localStorage.setItem("userId", auth.user.uid);
+          }
+        })
+        .catch((error) => {});
+
+      signInAnonymously(auth).catch((error) => {});
 
       const form = document.getElementById("guestbook-form");
       const messagesList = document.getElementById("messages");
@@ -717,8 +718,8 @@
         const name = document.getElementById("name").value;
         const message = document.getElementById("message").value;
 
-        let deviceId = localStorage.getItem("guestbookDeviceId");
-        const guestbookRef = ref(db, `guestbook/${deviceId}`);
+        let userId = localStorage.getItem("userId");
+        const guestbookRef = ref(db, `guestbook/${userId}`);
         set(guestbookRef, {
           name,
           message,
