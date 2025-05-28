@@ -554,7 +554,7 @@
             const calEl = document.getElementById("calendar");
             const calWidth = calEl.clientWidth;
             face.style.left =
-                fraction * (calWidth - (face.clientWidth + 25)) + "px";
+                fraction * (calWidth - (face.clientWidth)) + "px";
 
             const daysLeft = Math.ceil((endDate - now) / msPerDay);
             document.querySelector(".main-title").textContent =
@@ -659,9 +659,9 @@
 
         signInAnonymously(auth)
             .then((auth) => {
-                let storedUserId = localStorage.getItem("userId");
+                let storedUserId = localStorage.getItem("newUserId");
                 if (!storedUserId) {
-                    localStorage.setItem("userId", auth.user.uid);
+                    localStorage.setItem("newUserId", auth.user.uid);
                 }
             })
             .catch((error) => { });
@@ -676,7 +676,7 @@
             const name = document.getElementById("name").value;
             const message = document.getElementById("message").value;
 
-            let userId = localStorage.getItem("userId");
+            let userId = localStorage.getItem("newUserId");
             const guestbookRef = ref(db, `guestbook/${userId}`);
             set(guestbookRef, {
                 name,
